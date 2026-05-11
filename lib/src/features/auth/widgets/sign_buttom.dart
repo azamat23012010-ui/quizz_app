@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/src/core/const/colors/app_colors.dart';
 
@@ -11,15 +10,15 @@ class SignInWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 17),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 17),
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.mirage),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(image),
+          Image.asset(image,width: 20,height: 20,),
           SizedBox(width: 8),
           Text(
             label,

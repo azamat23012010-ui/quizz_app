@@ -1,45 +1,31 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class GoogleAuthService {
-  static final FirebaseAuth _auth = FirebaseAuth.instance; // ? instance
-  static final GoogleSignIn _googleSignIn =
-      GoogleSignIn.instance; // ? google sign in instance
-  static User? get currentUser => _auth.currentUser;
-  static Future<User?> signInWithGoogle(bool signInBack) async {
+class GoogleSignCustom {
+  static Future<User?> signInWithGoogle() async {
     try {
-      await GoogleSignIn.instance.initialize(
-        clientId:
-            '1025646682516-58gna92tnsuf8g05tkbee20l562fc4ih.apps.googleusercontent.com',
-      );
-
-      final googleUser = await _googleSignIn.authenticate(); // ? show diolog
-
-      // ? if user is null
-      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
-
-      if (googleAuth.idToken == null) {
+      await GoogleSignIn.instance.initialize();
+      final GoogleSignInAccount? gUser = await GoogleSignIn.instance
+          .authenticate();
+      if (gUser == null) {
         return null;
       }
 
-      final credential = GoogleAuthProvider.credential(
-        idToken: googleAuth.idToken,
+      final GoogleSignInAuthentication gAuth = await gUser.authentication;
+      final credential = GoogleAuthProvider.credential(idToken: gAuth.idToken);
+
+      final userCred = await FirebaseAuth.instance.signInWithCredential(
+        credential,
       );
 
-      final UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithCredential(credential);
-
-      return userCredential.user;
-    } catch (error) {
-      if (kDebugMode) {
-        debugPrint('Error signing in with Google $error');
-      }
-      return null;
+      final user = userCred.user;
+      return user;
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      throw FirebaseAuthException(code: e.message ?? 'Something went wrong !');
     }
   }
-
   static Future<void> signOut() async {
-    GoogleAuthService._googleSignIn.signOut();
+    await GoogleSignIn.instance.signOut();
   }
 }

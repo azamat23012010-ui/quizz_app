@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/firebase_options.dart';
 import 'package:quiz_app/src/core/const/colors/app_colors.dart';
+import 'package:quiz_app/src/core/router/app_router.dart';
 import 'package:quiz_app/src/features/auth/cubit/auth_cubit.dart';
 import 'package:quiz_app/src/features/auth/cubit/password_cubit.dart';
-import 'package:quiz_app/src/features/auth/screens/sign_in_screen.dart';
 import 'package:toastification/toastification.dart';
 
 void main() async {
@@ -33,7 +33,8 @@ class QuizApp extends StatelessWidget {
       builder: (context, snap) {
         return ToastificationWrapper(
           child: MaterialApp(
-            home: snap.hasData ? SizedBox() : SignInScreen(),
+            onGenerateRoute: AppRouter.onGenarate,
+            initialRoute: snap.hasData ? '/home' :'/sign_up',
             theme: ThemeData(
               scaffoldBackgroundColor: AppColors.primary,
               colorScheme: ColorScheme.dark(primary: AppColors.blue),
