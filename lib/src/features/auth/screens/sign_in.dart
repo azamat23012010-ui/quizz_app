@@ -27,7 +27,8 @@ class SignInScreen extends StatelessWidget {
               type: ToastificationType.error,
               title: Text(state.errorText),
             );
-          } else if (state is AuthLoadingState) {
+          } else if (state is AuthCanceledState) {
+            print('bekor qilindi');
           }
         },
         child: SingleChildScrollView(
@@ -84,7 +85,7 @@ class SignInScreen extends StatelessWidget {
                     text: 'Continue with Google',
                     icon: Image.asset(AppImages.google),
                     color: AppColors.congrey,
-                    onTap: () async{
+                    onTap: () async {
                       await context.read<AuthCubit>().signInWithGoogle();
                     },
                   ),

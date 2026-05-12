@@ -21,7 +21,7 @@ class GoogleSignCustom {
       final user = userCred.user;
       return user;
     } on FirebaseAuthException catch (e) {
-      print(e);
+      print('xatolik -> $e');
       throw FirebaseAuthException(code: e.message ?? 'Something went wrong !');
     }
   }

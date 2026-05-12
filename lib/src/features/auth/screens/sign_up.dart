@@ -69,17 +69,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthLoadedState) {
-            Navigator.pushNamed(
-              context,
-              '/home'
-            );
+            Navigator.pushNamed(context, '/home');
             // ! oddiy test uchun
           } else if (state is AuthErrorState) {
             toastification.show(
               type: ToastificationType.error,
               title: Text(state.errorText),
             );
-          } else if (state is AuthLoadingState) {
+          } else if (state is AuthCanceledState) {
+            print('bekor qilindi');
           }
         },
         child: Padding(

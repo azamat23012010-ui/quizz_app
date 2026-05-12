@@ -7,6 +7,8 @@ import 'package:quiz_app/src/core/const/colors/app_colors.dart';
 import 'package:quiz_app/src/core/router/app_router.dart';
 import 'package:quiz_app/src/features/auth/cubit/auth_cubit.dart';
 import 'package:quiz_app/src/features/auth/cubit/password_cubit.dart';
+import 'package:quiz_app/src/features/auth/screens/sign_up.dart';
+import 'package:quiz_app/src/features/home/screens/home_screen.dart';
 import 'package:toastification/toastification.dart';
 
 void main() async {
@@ -34,7 +36,7 @@ class QuizApp extends StatelessWidget {
         return ToastificationWrapper(
           child: MaterialApp(
             onGenerateRoute: AppRouter.onGenarate,
-            initialRoute: snap.hasData ? '/home' :'/sign_up',
+            home: snap.hasData ? HomeScreen() : SignUpScreen(),
             theme: ThemeData(
               scaffoldBackgroundColor: AppColors.primary,
               colorScheme: ColorScheme.dark(primary: AppColors.blue),

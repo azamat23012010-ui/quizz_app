@@ -6,11 +6,12 @@ class AuthInitial extends AuthState {}
 
 class AuthLoadingState extends AuthState {}
 
+class AuthCanceledState extends AuthState {}
+
 class AuthErrorState extends AuthState {
   final String errorText;
 
   AuthErrorState({required this.errorText});
-
 }
 
 class AuthLoadedState extends AuthState {}

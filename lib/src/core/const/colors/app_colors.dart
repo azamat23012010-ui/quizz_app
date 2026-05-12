@@ -12,4 +12,7 @@ static final Color white = Color(0XFFFFFFFF);
 static final Color green = Color(0XFF22C55E);
 // container
 static final Color congrey = Color(0XFF334155);
+// home
+static final Color black = Color(0XFF0A0A0C);
+static final Color slategrey = Color(0XFF64748B);
 }
