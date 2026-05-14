@@ -5,9 +5,10 @@ import 'package:quiz_app/src/core/const/colors/app_colors.dart';
 import 'package:quiz_app/src/features/home/widgets/mini_widgets.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBar({super.key, required this.user});
+  const HomeAppBar({super.key, required this.user, required this.ontap});
 
   final User? user;
+  final VoidCallback ontap;
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +22,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Row(
         children: [
-          CircleAvatar(
-            radius: 20,
-            backgroundImage: user?.photoURL != null
-                ? NetworkImage(user!.photoURL!)
-                : null,
-            backgroundColor: AppColors.blue.withAlpha(75),
+          GestureDetector(
+            onTap: ontap,
+            child: CircleAvatar(
+              radius: 20,
+              backgroundImage: user?.photoURL != null
+                  ? NetworkImage(user!.photoURL!)
+                  : null,
+              backgroundColor: AppColors.blue.withAlpha(75),
+            ),
           ),
           const SizedBox(width: 12),
           Column(

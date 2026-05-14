@@ -4,4 +4,5 @@ class AppImages {
   static final String google = 'assets/images/google.png';
   static final String leftlight = 'assets/images/left.png';
   static final String rightlight = 'assets/images/right.png';
+  static final String user = 'assets/images/user.png';
 }

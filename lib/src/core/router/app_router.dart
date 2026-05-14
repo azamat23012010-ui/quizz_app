@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/src/features/auth/screens/sign_in.dart';
 import 'package:quiz_app/src/features/auth/screens/sign_up.dart';
 import 'package:quiz_app/src/features/home/screens/home_screen.dart';
+import 'package:quiz_app/src/features/profile/profile_screen.dart';
 
 class AppRouter {
   static Route? onGenarate(RouteSettings settings) {
@@ -12,6 +13,8 @@ class AppRouter {
         return onPageChange(SignInScreen());
       case '/home':
         return onPageChange(HomeScreen());
+      case '/profile':
+        return onPageChange(ProfileScreen());
       default:
         return onPageChange(SizedBox());
     }

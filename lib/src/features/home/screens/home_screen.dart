@@ -54,7 +54,12 @@ class _HomeScreenState extends State<HomeScreen> {
     final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       backgroundColor: Colors.black, // appcolors.shark oqilmadi muammo chiqdi
-      appBar: HomeAppBar(user: user),
+      appBar: HomeAppBar(
+        user: user,
+        ontap: () {
+          Navigator.pushNamed(context, '/profile',arguments: user);
+        },
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -139,11 +144,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     const Spacer(),
-                    Icon(Icons.arrow_forward_ios,color: AppColors.white,size: 24,)
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.white,
+                      size: 24,
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 15)
+              const SizedBox(height: 15),
             ],
           ),
         ),
