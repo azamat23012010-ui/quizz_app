@@ -140,15 +140,18 @@ class HomeInfoCard extends StatelessWidget {
 
               Row(
                 children: [
-                  Text(
-                    'Keep it up! ${1000 - xp} XP to next level',
-                    style: GoogleFonts.spaceGrotesk(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                      color: AppColors.grey,
+                  Expanded(
+                    child: Text(
+                      'Keep it up! ${1000 - xp} XP to next level',
+                      maxLines: 1,
+                      style: GoogleFonts.spaceGrotesk(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        color: AppColors.grey,
+                      ),
                     ),
                   ),
-                  const Spacer(),
+                  const SizedBox(width: 8,),
                   Text(
                     'View Stats >',
                     style: GoogleFonts.spaceGrotesk(

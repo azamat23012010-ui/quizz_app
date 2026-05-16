@@ -15,4 +15,5 @@ static final Color congrey = Color(0XFF334155);
 // home
 static final Color black = Color(0XFF0A0A0C);
 static final Color slategrey = Color(0XFF64748B);
+static final Color orange = Color(0XFFF97316);
 }

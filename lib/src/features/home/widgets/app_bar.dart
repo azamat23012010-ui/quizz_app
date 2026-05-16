@@ -22,14 +22,21 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Row(
         children: [
-          GestureDetector(
-            onTap: ontap,
-            child: CircleAvatar(
-              radius: 20,
-              backgroundImage: user?.photoURL != null
-                  ? NetworkImage(user!.photoURL!)
-                  : null,
-              backgroundColor: AppColors.blue.withAlpha(75),
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(30),
+              onTap: ontap,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundImage: user?.photoURL != null
+                      ? NetworkImage(user!.photoURL!)
+                      : null,
+                  backgroundColor: AppColors.blue.withAlpha(75),
+                ),
+              ),
             ),
           ),
           const SizedBox(width: 12),

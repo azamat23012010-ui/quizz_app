@@ -6,15 +6,21 @@ import 'package:quiz_app/src/core/const/colors/app_colors.dart';
 import 'package:quiz_app/src/core/const/icons/app_icons.dart';
 import 'package:quiz_app/src/core/const/images/app_images.dart';
 import 'package:quiz_app/src/core/widgets/app_button.dart';
+import 'package:quiz_app/src/core/widgets/app_container.dart';
+import 'package:quiz_app/src/features/profile/widgets/custom_row.dart';
+import 'package:quiz_app/src/features/profile/widgets/custom_text2_profile.dart';
+import 'package:quiz_app/src/features/profile/widgets/languages_widget.dart';
 import 'package:quiz_app/src/features/profile/widgets/location_buttton.dart';
+import 'package:quiz_app/src/features/profile/widgets/profile_perccent.dart';
+import 'package:quiz_app/src/features/profile/widgets/text_profile.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key, this.user});
-  final User? user;
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final user = ModalRoute.of(context)?.settings.arguments as User?;
+    final List<String> languages = ['Rust', 'TS', 'Py'];
+    final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
@@ -26,7 +32,8 @@ class ProfileScreen extends StatelessWidget {
         backgroundColor: AppColors.primary,
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
-          child: Icon(Icons.arrow_back_ios, size: 24)),
+          child: Icon(Icons.arrow_back_ios, size: 24),
+        ),
         centerTitle: true,
         title: Text(
           'Profile',
@@ -51,7 +58,7 @@ class ProfileScreen extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 64,
                     backgroundImage: user?.photoURL != null
-                        ? NetworkImage(user!.photoURL!)
+                        ? NetworkImage(user!.photoURL!) as ImageProvider
                         : AssetImage(AppImages.user),
                     backgroundColor: AppColors.blue.withAlpha(75),
                   ),
@@ -76,12 +83,15 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            Text(
-              '@${user?.email}',
-              style: GoogleFonts.workSans(
-                fontWeight: FontWeight.w700,
-                fontSize: 24,
-                color: AppColors.white,
+            Flexible(
+              child: Text(
+                '@${user?.email}',
+                maxLines: 1,
+                style: GoogleFonts.workSans(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 24,
+                  color: AppColors.white,
+                ),
               ),
             ),
             Text(
@@ -114,14 +124,80 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (_, int index) {
-                return Container();
-              },
+            Row(
+              children: [
+                Expanded(
+                  child: AppContainer(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomRowProfile(
+                          label: 'Solved'.toUpperCase(),
+                          icon: AppIcons.solved,
+                        ),
+                        SizedBox(height: 5),
+                        CustomTextProfile(text: '125'),
+                        SizedBox(height: 12),
+                        ProfilePercent(value: 125),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(width: 12),
+                Expanded(
+                  child: AppContainer(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomRowProfile(
+                          icon: AppIcons.rank,
+                          label: 'Global Rank'.toUpperCase(),
+                        ),
+                        SizedBox(height: 5),
+                        CustomTextProfile(text: 'Top 5%'),
+                        SizedBox(height: 12),
+                        CustomText2Profile(text: '1.2k spots jumped this week'),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: AppContainer(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomRowProfile(icon: AppIcons.fire, label: 'streak'),
+                        SizedBox(height: 5),
+                        CustomTextProfile(text: '12 Days'),
+                        SizedBox(height: 12),
+                        CustomText2Profile(text: 'Next reward: 15 days'),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(width: 12),
+                Expanded(
+                  child: AppContainer(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomRowProfile(icon: AppIcons.code, label: 'Languages'),
+                        SizedBox(height: 5),
+                        Row(
+                          children: List.generate(languages.length, (index) {
+                            return CustomProfileLanguages(text: languages[index]);
+                          }),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
