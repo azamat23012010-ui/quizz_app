@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/src/core/const/colors/app_colors.dart';
 import 'package:quiz_app/src/core/const/icons/app_icons.dart';
 import 'package:quiz_app/src/core/const/images/app_images.dart';
+import 'package:quiz_app/src/features/profile/widgets/app_bar.dart';
 import 'package:quiz_app/src/core/widgets/app_button.dart';
 import 'package:quiz_app/src/core/widgets/app_container.dart';
 import 'package:quiz_app/src/features/profile/widgets/custom_row.dart';
@@ -22,27 +23,14 @@ class ProfileScreen extends StatelessWidget {
     final List<String> languages = ['Rust', 'TS', 'Py'];
     final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 70,
-        elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(height: 1, color: AppColors.grey.withOpacity(0.2)),
-        ),
-        backgroundColor: AppColors.primary,
-        leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: Icon(Icons.arrow_back_ios, size: 24),
-        ),
-        centerTitle: true,
-        title: Text(
-          'Profile',
-          style: GoogleFonts.workSans(
-            fontWeight: FontWeight.w700,
-            fontSize: 18,
-          ),
-        ),
-        actions: [Icon(Icons.settings, size: 24), const SizedBox(width: 16)],
+      appBar: CustomAppBar(
+        leading: Icon(Icons.arrow_back_ios, size: 20),
+        actions: SizedBox(),
+        activeActions: true,
+        pageName: 'Profile',
+        ontapActions: () {
+          Navigator.pushNamed(context, '/settings');
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -186,11 +174,16 @@ class ProfileScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomRowProfile(icon: AppIcons.code, label: 'Languages'),
+                        CustomRowProfile(
+                          icon: AppIcons.code,
+                          label: 'Languages',
+                        ),
                         SizedBox(height: 5),
                         Row(
                           children: List.generate(languages.length, (index) {
-                            return CustomProfileLanguages(text: languages[index]);
+                            return CustomProfileLanguages(
+                              text: languages[index],
+                            );
                           }),
                         ),
                       ],

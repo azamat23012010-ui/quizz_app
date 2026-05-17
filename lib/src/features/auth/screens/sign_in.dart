@@ -100,6 +100,7 @@ class SignInScreen extends StatelessWidget {
                     color: AppColors.blue,
                     onTap: () {
                       // bor accountga kirish
+                      Navigator.pushNamed(context, '/login');
                     },
                   ),
                   const SizedBox(height: 32),

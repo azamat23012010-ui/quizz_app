@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_app/src/core/const/colors/app_colors.dart';
 import 'package:quiz_app/src/features/home/widgets/app_bar.dart';
 import 'package:quiz_app/src/features/home/widgets/custom_button.dart';
 import 'package:quiz_app/src/features/home/widgets/home_topics.dart';

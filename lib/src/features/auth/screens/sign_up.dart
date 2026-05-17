@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -77,7 +76,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               title: Text(state.errorText),
             );
           } else if (state is AuthCanceledState) {
-            print('bekor qilindi');
           }
         },
         child: Padding(
